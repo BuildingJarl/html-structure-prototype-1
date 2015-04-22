@@ -51,18 +51,22 @@ class ThreeJsCtrl {
 			}
 
 		}, false);
-
+		
+		/*
 		window.addEventListener('resize', (event) => {
 			this.onResize(event)
 		})
+		*/
 	}
 
 	onResize() {
+		//not working
 		var w = this._settings.container.clientWidth;
 		var h = this._settings.container.clientHeight;
 
-		this._mainCam.resizeHandler( w, h );
+		
 		this._renderer.setSize( w, h );
+		this._mainCam.resizeHandler( w, h )
 	}
 
 	addToScene( obj ) {

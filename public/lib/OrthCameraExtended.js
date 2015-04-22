@@ -5,7 +5,7 @@ class OrthCameraExtended extends THREE.OrthographicCamera{
 	constructor( w, h ) {
 
 		let aspectRatio = w / h;
-		let viewSize = h;
+		let viewSize = h; //set to h, means world units is pixels
 
 		let left = (-aspectRatio * viewSize) / 2;
 		let right = (aspectRatio * viewSize) / 2;
@@ -18,9 +18,8 @@ class OrthCameraExtended extends THREE.OrthographicCamera{
 	}
 
 	resizeHandler( w, h ) {
-
-		let aspectRatio = w/ h;
-		let viewSize = h;
+		//look at this again
+		let aspectRatio = w / h;
 
 		this.aspect = aspectRatio;
 		this.left = (-aspectRatio * viewSize) / 2;
