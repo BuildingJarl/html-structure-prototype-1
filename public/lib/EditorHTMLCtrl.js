@@ -16,7 +16,7 @@ export default class EditorHTMLCtrl {
 		//Inital Setup
 		ace.config.set("basePath", "/jspm_packages/github/ajaxorg/ace-builds@1.1.8/");
 
-		this._editor = ace.edit(settings.elements.htmlEditorContainer.id);
+		this._editor = ace.edit(settings.elements.htmlEditor.id);
 		this._editor.setTheme("ace/theme/monokai");
 		this._editor.getSession().setMode("ace/mode/html");
 

@@ -1,5 +1,6 @@
 import THREE from 'three.js';
 import ThreeBoxWithBorders from './ThreeBoxWithBorders';
+import ThreeBoxWithBordersIndented from './ThreeBoxWithBordersIndented';
 import ThreeTriangle from './ThreeTriangle';
 
 class ThreeObjectFactory {
@@ -49,6 +50,13 @@ class ThreeObjectFactory {
 	createBoxWithBorder(x, y, z, color) {
 
 		var box = new ThreeBoxWithBorders( x, y, z, color );
+
+		return box;
+	}
+
+	createBoxWithBordersIndented(x, y, z, color, paths) {
+
+		var box = new ThreeBoxWithBordersIndented( x, y, z, color, paths );
 
 		return box;
 	}

@@ -1,49 +1,12 @@
 
-
-function multiCalcu(depth) {
-
-	var res = [];
-
-	for( let i = 0; i <= depth; i++) {
-
-		if(i===0) {
-			res.push(0);
-		}
-
-		else if(i === 1) {
-			res.push(1);
-		}
-
-		else {
-			res.push(res[i-1]+0.5);
-		}
-	}
-
-	return res;
-} 
-
 function calculateLayout(ast, dim) {
 
-	//var nodeWidth = 30;
-	//var nodeHeight = 4;
-	//var dividerSpace = 1
-
-	var stats = calcStats(ast);
-	var multi = multiCalcu(stats.depth);
-
-	var nodeWidth = dim.width / multi[stats.depth];
-	var nodeHeight = dim.height / stats.totalNodes;
-
-
-
-	console.log(dim.width)
-	console.log(nodeWidth)
+	var nodeWidth = 60;
+	var nodeHeight = 20;
 
 	var nodesList = [];
 	var nodeHash = {};
 	var path = [];
-
-	//Since this is a none space filling technique - w and h stay the same
 
 	var startX = (-dim.width/2) + nodeWidth/2;
 	var startY = (dim.height/2) - nodeHeight/2;
@@ -72,11 +35,11 @@ function calculateLayout(ast, dim) {
 					node.layout.position.x = startX;
 					node.layout.position.y = startY;
 				} else {
-					let siblings = nodes.slice(0,i);
-					let offsetMulti = totalDesendantsCount(siblings);
+
+					var sib = nodes[i-1]
 					
 					node.layout.position.x = startX;
-					node.layout.position.y = startY - (nodeHeight * offsetMulti);
+					node.layout.position.y = sib.layout.position.y - ((totalDesendantsCount(sib.children) * nodeHeight) + nodeHeight);
 				}
 			} else {
 				if(i === 0) {
@@ -85,21 +48,35 @@ function calculateLayout(ast, dim) {
 					node.layout.position.y = -nodeHeight;
 				} else {
 			
-					let sibling = nodes[i-1];
-					let siblings = nodes.slice(0,i);
-					let offsetMulti = totalDesendantsCount(sibling.children)+1;
+					var sib = nodes[i-1]
 					
-					let x = nodeWidth/2;
-					let y = sibling.layout.position.y - (nodeHeight*offsetMulti);
-
-					node.layout.position.x = x
-					node.layout.position.y = y;
+					node.layout.position.x = nodeWidth/2;
+					node.layout.position.y = sib.layout.position.y - ((totalDesendantsCount(sib.children) * nodeHeight) + nodeHeight);
 				}
 			}
 
-			trav( node.children, node );
-			path.pop();
 
+			//edges
+			node.layout.edge = {};
+			node.layout.edge.paths = [];
+			
+			//node.layout.edge.start = {};
+			//node.layout.edge.start.x = node.layout.position.x - (nodeWidth/4);
+			//node.layout.edge.start.y = node.layout.position.y - (nodeHeight/2);
+
+
+
+			trav( node.children, node );
+
+			if(parent) {
+				var edgePath = { x: 0, y: 0, z: 0};
+				edgePath.x = node.layout.position.x - (nodeWidth/2); 
+				edgePath.y = node.layout.position.y;
+				
+				parent.layout.edge.paths.push(edgePath);
+			}
+
+			path.pop();
 		}
 	}
 }
@@ -116,30 +93,5 @@ function totalDesendantsCount(nodes) {
 		}
 	}
 }
-
-function calcStats (tree) {
-
-	var depth = 0;
-	var dIndex = 0;
-	var totalNodes = 0;
-
-	traverse(tree);
-
-	return {depth:depth, totalNodes:totalNodes};
-
-	function traverse(nodes) {
-		
-		for( let [ i, node ] of nodes.entries() ) {
-			dIndex++;
-			totalNodes++;
-			if(dIndex > depth) {
-				depth = dIndex;
-			}
-			traverse(node.children);
-			dIndex--;
-		}
-	}
-}
-
 
 export default calculateLayout;

@@ -8,12 +8,15 @@ var elements = {
 	menu: document.getElementById('top-menu-container'),
 	viewport: document.getElementById('viewport'),
 	visualisationContainer: document.getElementById('visualisation-container'),
+	visOptions: document.getElementById('vis-options'),
+	vis: document.getElementById('vis'),
 	htmlEditorContainer: document.getElementById('html-editor-container'),
+	htmlEditorBreadcrumbs: document.getElementById('html-editor-breadcrumbs'),
+	htmlEditor: document.getElementById('html-editor'),
 };
 
-
 var threeSettings = {
-	container: elements.visualisationContainer,
+	container: elements.vis,
 	stats: false,
 	rendererSettings: { antialias: true, alpha: true }
 };

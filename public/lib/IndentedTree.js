@@ -24,11 +24,13 @@ class IndentedTree extends THREE.Object3D {
 			
 			for( let [ i, astNode ] of astNodes.entries() ) {
 
-				let mesh = ThreeObjectFactory.createBoxWithBorder(
+				
+				let mesh = ThreeObjectFactory.createBoxWithBordersIndented(
 					astNode.layout.width,
 					astNode.layout.height,
 					1,
-					ColorHelper.getColorAtPos(2)
+					ColorHelper.getColorAtPos(2),
+					astNode.layout.edge.paths
 				);
 
 				mesh.position.set(
@@ -47,11 +49,13 @@ class IndentedTree extends THREE.Object3D {
 	}
 
 	removeChildren() {
+		
 		this.children = [];
 	}
 
 	//just ideas - might have to delete
 	onNodeSelection( path ) {
+		
 		if(path.length > 0) {
 			if(this.selectedNode === null || this.selectedNode === undefined) {
 				this.selectedNode = this.data.hash[path.join('-')];
@@ -77,10 +81,6 @@ class IndentedTree extends THREE.Object3D {
 				this.selectedNode = null;
 			}
 		}
-	}
-
-	update() {
-
 	}
 }
 
