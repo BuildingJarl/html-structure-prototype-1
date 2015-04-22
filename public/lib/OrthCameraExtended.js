@@ -22,22 +22,22 @@ class OrthCameraExtended extends THREE.OrthographicCamera{
 		let aspectRatio = w/ h;
 		let viewSize = h;
 
-		this._mainCam.aspect = aspectRatio;
-		this._mainCam.left = (-aspectRatio * viewSize) / 2;
-		this._mainCam.right = (aspectRatio * viewSize) / 2;
-		this._mainCam.top = viewSize / 2;
-		this._mainCam.bottom = -viewSize / 2;
-	    this._mainCam.updateProjectionMatrix();
+		this.aspect = aspectRatio;
+		this.left = (-aspectRatio * viewSize) / 2;
+		this.right = (aspectRatio * viewSize) / 2;
+		this.top = viewSize / 2;
+		this.bottom = -viewSize / 2;
+	    this.updateProjectionMatrix();
 
 	    console.log('window resize: ' + w + ' x ' + h );
 	}
 
 	getWorldPosOfTopLeftCorner( args ){
 
-		let pos = this._mainCam.position.clone();
+		let pos = this.position.clone();
 
-		pos.x += this._mainCam.left;
-		pos.y += this._mainCam.top;
+		pos.x += this.left;
+		pos.y += this.top;
 
 		pos.x += (args.nodeSizeX / 2);
 		pos.y -= (args.nodeSizeY / 2);
@@ -63,7 +63,7 @@ class OrthCameraExtended extends THREE.OrthographicCamera{
 	    var y = - ( newScreenY / domEl.clientHeight ) * 2 + 1;
 
 	    vector.set( x, y, - 1 ); // z = - 1 important!
-	    vector.unproject( this._mainCam );
+	    vector.unproject( this );
 
 	    return vector;
 	}
@@ -71,7 +71,7 @@ class OrthCameraExtended extends THREE.OrthographicCamera{
 	camDirection() {
 
 		var dir = new THREE.Vector3();
-		dir.set( 0, 0, -1 ).transformDirection( this._mainCam.matrixWorld );
+		dir.set( 0, 0, -1 ).transformDirection( this.matrixWorld );
 
 		return dir;
 	}

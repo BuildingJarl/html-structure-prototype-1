@@ -41,6 +41,70 @@ function createLine(start, paths) {
 	return line;
 }
 
+
+
+/*
+	var canvas = document.createElement('canvas');
+    var size = 256; // CHANGED
+    canvas.width = size;
+    canvas.height = size;
+    var context = canvas.getContext('2d');
+    context.fillStyle = '#ff0000'; // CHANGED
+    context.textAlign = 'center';
+    context.font = '20pt Arial';
+    context.fillText("some text", size / 2, size / 2);
+
+    var amap = new THREE.Texture(canvas);
+    amap.needsUpdate = true;
+
+    var mat = new THREE.SpriteMaterial({
+        map: amap,
+        transparent: false,
+        useScreenCoordinates: true,
+        color: 0xffffff // CHANGED
+    });
+
+    var sp = new THREE.Sprite(mat);
+    sp.position.set(0,0,-20)
+    sp.scale.set( 10, 10, 1 ); // CHANGED
+    scene.add(sp);
+
+*/
+
+function createLable() {
+	var canvas = document.createElement('canvas');
+
+    canvas.width = 128;
+    canvas.height = 128;
+
+    var fontsize = 50;
+
+    var context = canvas.getContext('2d');
+    context.fillStyle = '#ff0000'; // CHANGED
+    context.textAlign = 'center';
+    context.font = fontsize + 'px Arial';
+    context.fillText("some text", canvas.width / 2, canvas.height / 2);
+    context.fillStyle = "#9ea7b8";
+    context.fillRect(0,0,canvas.width,canvas.height);
+
+
+    var texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+
+    var mat = new THREE.SpriteMaterial({
+    	map: texture,
+    	transparent: false,
+    	useScreenCoordinates: false,
+    	color: 0x000000
+    });
+
+    var label = new THREE.Sprite(mat);
+    //label.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
+    label.scale.set( 20, 20 , 20 );
+    return label;
+
+}
+
 class ThreeBoxWithBordersIndented extends THREE.Object3D {
 
 	constructor( x, y, z, color, paths ) {
@@ -53,6 +117,8 @@ class ThreeBoxWithBordersIndented extends THREE.Object3D {
 		this._mesh = new THREE.Mesh( geo, mat );
 		this._border = new THREE.EdgesHelper( this._mesh, '0xffffff' );
 		this._edges = createLine( {x: -(x/4), y: -(y/2), z:0 } ,paths);
+		this._text = createLable();
+		this._text.position.set(x,0,0);
 	  	
 	  	//not advised to do this but it seems to fix my problem
 	  	//https://github.com/mrdoob/three.js/issues/6023
@@ -62,6 +128,7 @@ class ThreeBoxWithBordersIndented extends THREE.Object3D {
 		this.add(this._border);
 		this.add(this._mesh);
 		this.add(this._edges);
+		this.add(this._text);
 	}
 
 	onSelect() {
