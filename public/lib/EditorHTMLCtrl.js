@@ -107,10 +107,10 @@ export default class EditorHTMLCtrl {
 
 			if(i >= range.start.row && i <= range.end.row) {
 				//this has to be here since it will keep adding the same class
-				this._editor.getSession().removeGutterDecoration(i,'editor-gutter-highlight');
-				this._editor.getSession().addGutterDecoration(i,'editor-gutter-highlight');
+				this._editor.getSession().removeGutterDecoration( i, 'editor-gutter-highlight' );
+				this._editor.getSession().addGutterDecoration( i, 'editor-gutter-highlight' );
 			} else {
-				this._editor.getSession().removeGutterDecoration(i,'editor-gutter-highlight');
+				this._editor.getSession().removeGutterDecoration( i, 'editor-gutter-highlight' );
 			}
 		}
 	}

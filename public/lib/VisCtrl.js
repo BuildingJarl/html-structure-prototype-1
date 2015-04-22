@@ -3,7 +3,9 @@ import EventDispatcher from './EventDispatcher';
 
 import TreeFactory from './TreeFactory';
 
-
+/*
+	This is where the worker for the layout calculations should be added!
+*/
 
 class VisCtrl {
 	
