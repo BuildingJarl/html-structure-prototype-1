@@ -1,90 +1,44 @@
-body {
-	padding: 0;
-	margin: 0;
-}
+#top-menu-container {
 
-#app-container {	
+	/* position */
 	position: absolute;
+	top:0px;
 
-	top: 0px;
-	left: 0px;
-	bottom: 0px;
-	right: 0px;
-
-	overflow: hidden;
-}
-
-#top-split {
-	position: absolute;
-
-	top: 0px;
-	bottom: 600px;
-	left: 0px;
-	right: 0px;
-
-	border-top: 1px solid #777D7E;
-}
-
-#vis-changer {
-	position: absolute;
-	right:0;
-	top: 0;
-}
-
-#live-view {
-	height: 100%;
+	/* size */
+	height: 50px;
 	width: 100%;
 
-	border: none;
-	padding: 0;
-	margin: 0;
+	background-color: green;
 }
 
-#bottom-split {
+#viewport {
+
+	/* position */
 	position: absolute;
-
-	height: 600px;
-
+	top: 50px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
 }
+	    	
+#visualisation-container {
 
-#vis-panel {
-	display: inline-block;
+	/* position */
 	position: absolute;
-		
-	top: 0px;
+	top:0px;
 	bottom: 0px;
 	left: 0px;
 
-	width: 300px;
-	background-color: #1D1E19;
+	/* size */
+	width: 400px;
 }
 
-#editor-panel { 
-	display: inline-block;
+#html-editor-container {
+
+	/* position */
 	position: absolute;
-	border-left: 2px solid #777D7E;
-		
-	top: 0px;
+	top:0px;
 	bottom: 0px;
-	left: 300px;
-	right: 300px;
-}
-
-.editor-gutter-highlight {
-	background-color: red;
-}
-
-#css-panel {
-	display: inline-block;
-	position: absolute;
-	z-index: 1;
-	border-left: 2px solid #777D7E;	
-	top: 0px;
-	bottom: 0px;
+	left: 400px;
 	right: 0px;
-
-	width: 300px;
 }
