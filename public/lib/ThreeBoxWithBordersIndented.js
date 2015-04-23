@@ -135,24 +135,28 @@ function createLable(w,h,d) {
 }
 
 function makeSprite() {
-    var canvas = document.createElement('canvas'),
-        context = canvas.getContext('2d'),
-        metrics = null,
-        textHeight = 100,
-        textWidth = 0,
-        actualFontSize = 50;
+
+	var text = 'div'
+
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var metrics = null;
+    var textHeight = 100;
+    var textWidth = 0;
+    var actualFontSize = 16; //13 = 10pt, 16 = 12pt
 
     context.font = "normal " + textHeight + "px Arial";
-    metrics = context.measureText("Sample Text");
-    var textWidth = metrics.width;
+    metrics = context.measureText(text);
+    
+    textWidth = metrics.width;
 
     canvas.width = textWidth;
     canvas.height = textHeight;
     context.font = "normal " + textHeight + "px Arial";
     context.textAlign = "center";
     context.textBaseline = "middle";
-    context.fillStyle = "#ff0000";
-    context.fillText("Sample Text", textWidth / 2, textHeight / 2);
+    //context.fillStyle = "#ff0000";
+    context.fillText(text, textWidth / 2, textHeight / 2);
 
     var texture = new THREE.Texture(canvas);
     texture.needsUpdate = true;
@@ -170,7 +174,7 @@ function makeSprite() {
     textObject.textWidth = (textWidth / textHeight) * textObject.textHeight;
     
 
-    sprite.scale.set(textWidth / textHeight * actualFontSize, actualFontSize, 1);
+    sprite.scale.set( textWidth / textHeight * actualFontSize, actualFontSize, 1);
     
 
     textObject.add(sprite);

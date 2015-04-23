@@ -2,7 +2,7 @@
 function calculateLayout(ast, dim) {
 
 	var nodeWidth = 50; //in px
-	var nodeHeight = 50;
+	var nodeHeight = 25;
 	var nodeDepth = 1;
 
 	var nodesList = [];
