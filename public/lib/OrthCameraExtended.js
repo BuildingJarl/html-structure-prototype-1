@@ -3,9 +3,11 @@ import THREE from 'three.js';
 class OrthCameraExtended extends THREE.OrthographicCamera{
 
 	constructor( w, h ) {
+		//defines a box in space
 
 		let aspectRatio = w / h;
 		let viewSize = h; //set to h, means world units is pixels
+		//also how much vertical space I would like to fit into the view
 
 		let left = (-aspectRatio * viewSize) / 2;
 		let right = (aspectRatio * viewSize) / 2;
@@ -20,7 +22,8 @@ class OrthCameraExtended extends THREE.OrthographicCamera{
 	resizeHandler( w, h ) {
 		//look at this again
 		let aspectRatio = w / h;
-
+		let viewSize = h;
+		
 		this.aspect = aspectRatio;
 		this.left = (-aspectRatio * viewSize) / 2;
 		this.right = (aspectRatio * viewSize) / 2;

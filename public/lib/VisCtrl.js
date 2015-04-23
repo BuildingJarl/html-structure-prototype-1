@@ -20,10 +20,11 @@ class VisCtrl {
 		//add the tree to the scene
 		this._threeJsCtrl.addToScene( this._tree );
 
+
+		//events
 		EventDispatcher.addEventListener( 'astUpdated', (event) => {
 			this.updateVis(event.message);
 		});
-
 
 		EventDispatcher.addEventListener( 'astSelectionUpdated', (event) => {
 			this.updateVisSelection(event.message);
@@ -36,8 +37,6 @@ class VisCtrl {
 		EventDispatcher.addEventListener( 'changeVis', (event) => {
 			this.changeTreeVisType( event.message )
 		});
-
-
 	}
 
 	changeTreeVisType( type ) {
@@ -69,7 +68,7 @@ class VisCtrl {
 	}
 
 	updateVis( ast ) {
-		
+		//space filling vs space taking
 		let dim = {};
 		dim.width = this._settings.three.container.clientWidth;
 		dim.height = this._settings.three.container.clientHeight;

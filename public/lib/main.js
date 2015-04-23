@@ -18,6 +18,7 @@ var elements = {
 var threeSettings = {
 	container: elements.vis,
 	stats: false,
+	axis: true,
 	rendererSettings: { antialias: true, alpha: true }
 };
 

@@ -35,6 +35,12 @@ class ThreeJsCtrl {
 			this._settings.container.appendChild( this._stats.domElement );
 		}
 
+		if(settings.axis) {
+			this._axisHelper = new THREE.AxisHelper( 50 );
+			this._axisHelper.position.set(0,0,-20);
+			this._scene.add( this._axisHelper );
+		}
+
 		//for Events
 		this.raycaster = new THREE.Raycaster(); // create once
 		this.mouse = new THREE.Vector2(); // create once
@@ -47,14 +53,31 @@ class ThreeJsCtrl {
 			let intersected = this.cast(event);
 
 			if(intersected) {
+				console.log(intersected)
 				EventDispatcher.dispatchEvent({type:'nodeSelectedOnVis', message: intersected});
 			}
 
 		}, false);
 		
+
+		window.addEventListener('resize', (event)=>{
+			var w = this._settings.container.clientWidth;
+			var h = this._settings.container.clientHeight;
+			
+			this._mainCam.resizeHandler(w,h);
+			this._renderer.setSize(w,h);
+			
+
+			this.reDraw();
+		});
 		/*
-		window.addEventListener('resize', (event) => {
-			this.onResize(event)
+		Object.observe(this._scene.children, (change) => {
+
+			var type = change.type ;
+			var name = change.name;
+			var obj = change['object'];
+			var oldValue = change.oldValue;
+			console.log(change)
 		})
 		*/
 	}
@@ -104,18 +127,3 @@ class ThreeJsCtrl {
 }
 
 export default ThreeJsCtrl;
-
-
-/*
-var raycaster = new THREE.Raycaster(); // create once
-var mouse = new THREE.Vector2(); // create once
-
-...
-
-mouse.x = ( event.clientX / renderer.domElement.width ) * 2 - 1;
-mouse.y = - ( event.clientY / renderer.domElement.height ) * 2 + 1;
-
-raycaster.setFromCamera( mouse, camera );
-
-var intersects = raycaster.intersectObjects( objects, recursiveFlag );
-*/
