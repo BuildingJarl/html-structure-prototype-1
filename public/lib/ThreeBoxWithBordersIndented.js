@@ -71,21 +71,55 @@ function createLine(start, paths) {
 
 */
 
+/*
+view-source:http://stemkoski.github.io/Three.js/Texture-From-Canvas.html
+
+	/////// draw text on canvas /////////
+	
+	1)
+	// create a canvas element
+	var canvas1 = document.createElement('canvas');
+	var context1 = canvas1.getContext('2d');
+	context1.font = "Bold 40px Arial";
+	context1.fillStyle = "rgba(255,0,0,0.95)";
+    context1.fillText('Hello, world!', 0, 50);
+    
+    2)
+	// canvas contents will be used for a texture
+	var texture1 = new THREE.Texture(canvas1) 
+	texture1.needsUpdate = true;
+     
+     3)
+    var material1 = new THREE.MeshBasicMaterial( {map: texture1, side:THREE.DoubleSide } );
+    material1.transparent = true;
+	
+	4)
+    var mesh1 = new THREE.Mesh(
+        new THREE.PlaneGeometry(canvas1.width, canvas1.height),
+        material1
+      );
+	mesh1.position.set(0,50,0);
+
+	5)
+	scene.add( mesh1 );
+*/
+
 function createLable() {
 	var canvas = document.createElement('canvas');
 
-    canvas.width = 128;
-    canvas.height = 128;
+    //canvas.width = 128;
+    //canvas.height = 128;
 
-    var fontsize = 50;
+    var fontsize = 20;
 
     var context = canvas.getContext('2d');
     context.fillStyle = '#ff0000'; // CHANGED
     context.textAlign = 'center';
     context.font = fontsize + 'px Arial';
-    context.fillText("some text", canvas.width / 2, canvas.height / 2);
-    context.fillStyle = "#9ea7b8";
-    context.fillRect(0,0,canvas.width,canvas.height);
+    //context.fillText("some text", canvas.width / 2, canvas.height / 2);
+    context.fillText("some text", fontsize/2, fontsize/2);
+    //context.fillStyle = "#9ea7b8";
+    //context.fillRect(0,0,canvas.width,canvas.height);
 
 
     var texture = new THREE.Texture(canvas);
@@ -99,7 +133,7 @@ function createLable() {
     });
 
     var label = new THREE.Sprite(mat);
-    //label.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
+    //label.scale.set(20,20,20);
     label.scale.set( 20, 20 , 20 );
     return label;
 
