@@ -10,9 +10,10 @@ class OrthCameraExtended extends THREE.OrthographicCamera{
 
 		let aspectRatio = w/h; //1 unit should be one pixel
 
-
+		/*
 		console.log(aspectRatio)
 		console.log(w/h)
+		*/
 		
 		let left = (-aspectRatio * viewSize) / 2;
 		let right = (aspectRatio * viewSize) / 2;
@@ -21,7 +22,7 @@ class OrthCameraExtended extends THREE.OrthographicCamera{
 		let near = 1;
 		let far = 100;
 
-		console.log({l:left, r: right, t:top, b:bottom})
+		//console.log({l:left, r: right, t:top, b:bottom})
 
 		super( left, right, top, bottom, near, far );
 

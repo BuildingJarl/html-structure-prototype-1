@@ -104,22 +104,16 @@ view-source:http://stemkoski.github.io/Three.js/Texture-From-Canvas.html
 	scene.add( mesh1 );
 */
 
-function createLable() {
+function createLable(w,h,d) {
+	
 	var canvas = document.createElement('canvas');
-
-    //canvas.width = 128;
-    //canvas.height = 128;
-
-    var fontsize = 20;
-
     var context = canvas.getContext('2d');
-    context.fillStyle = '#ff0000'; // CHANGED
-    context.textAlign = 'center';
-    context.font = fontsize + 'px Arial';
+
+   // ontext.textAlign = 'center';
+    //context.font = 'normal ' + textHeight + 'px Arial';
     //context.fillText("some text", canvas.width / 2, canvas.height / 2);
-    context.fillText("some text", fontsize/2, fontsize/2);
-    //context.fillStyle = "#9ea7b8";
-    //context.fillRect(0,0,canvas.width,canvas.height);
+    context.fillStyle = "#9ea7b8";
+    context.fillRect( 0, 0, 50, 50 );
 
 
     var texture = new THREE.Texture(canvas);
@@ -134,9 +128,54 @@ function createLable() {
 
     var label = new THREE.Sprite(mat);
     //label.scale.set(20,20,20);
-    label.scale.set( 20, 20 , 20 );
+    //label.scale.set( h,w,d );
+    label.scale.set( 64, 64, 1.0)
     return label;
 
+}
+
+function makeSprite() {
+    var canvas = document.createElement('canvas'),
+        context = canvas.getContext('2d'),
+        metrics = null,
+        textHeight = 100,
+        textWidth = 0,
+        actualFontSize = 50;
+
+    context.font = "normal " + textHeight + "px Arial";
+    metrics = context.measureText("Sample Text");
+    var textWidth = metrics.width;
+
+    canvas.width = textWidth;
+    canvas.height = textHeight;
+    context.font = "normal " + textHeight + "px Arial";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillStyle = "#ff0000";
+    context.fillText("Sample Text", textWidth / 2, textHeight / 2);
+
+    var texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+
+    var material = new THREE.SpriteMaterial( { 
+    	map: texture, 
+    	useScreenCoordinates: false
+    });
+
+    material.transparent = true;
+    //var textObject = new THREE.Sprite(material);
+    var textObject = new THREE.Object3D();
+    var sprite = new THREE.Sprite(material);
+    textObject.textHeight = actualFontSize;
+    textObject.textWidth = (textWidth / textHeight) * textObject.textHeight;
+    
+
+    sprite.scale.set(textWidth / textHeight * actualFontSize, actualFontSize, 1);
+    
+
+    textObject.add(sprite);
+
+    return textObject;
 }
 
 class ThreeBoxWithBordersIndented extends THREE.Object3D {
@@ -151,8 +190,8 @@ class ThreeBoxWithBordersIndented extends THREE.Object3D {
 		this._mesh = new THREE.Mesh( geo, mat );
 		this._border = new THREE.EdgesHelper( this._mesh, '0xffffff' );
 		this._edges = createLine( {x: -(x/4), y: -(y/2), z:0 } ,paths);
-		this._text = createLable();
-		this._text.position.set(x,0,0);
+		this._text = makeSprite();
+		this._text.position.set( 80, 0, 0);
 	  	
 	  	//not advised to do this but it seems to fix my problem
 	  	//https://github.com/mrdoob/three.js/issues/6023

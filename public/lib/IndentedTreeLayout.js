@@ -61,12 +61,6 @@ function calculateLayout(ast, dim) {
 			//edges
 			node.layout.edge = {};
 			node.layout.edge.paths = [];
-			
-			//node.layout.edge.start = {};
-			//node.layout.edge.start.x = node.layout.position.x - (nodeWidth/4);
-			//node.layout.edge.start.y = node.layout.position.y - (nodeHeight/2);
-
-
 
 			trav( node.children, node );
 
