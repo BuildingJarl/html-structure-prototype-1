@@ -1,8 +1,9 @@
 
 function calculateLayout(ast, dim) {
 
-	var nodeWidth = 60;
-	var nodeHeight = 20;
+	var nodeWidth = 50; //in px
+	var nodeHeight = 50;
+	var nodeDepth = 1;
 
 	var nodesList = [];
 	var nodeHash = {};
@@ -23,6 +24,7 @@ function calculateLayout(ast, dim) {
 			node.layout = {};
 			node.layout.width = nodeWidth;
 			node.layout.height = nodeHeight;
+			node.layout.depth = nodeDepth;
 
 			node.layout.position = {};
 

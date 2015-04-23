@@ -9,7 +9,7 @@ class IndentedTree extends THREE.Object3D {
 		super();
 		this.data = { ast: [] };
 		this.selectedNode = null;
-		this.position.set(0,0,-20);
+		this.position.set(0,0,0);
 	}
 
 	updateTree( ast, dim ) {
@@ -24,11 +24,11 @@ class IndentedTree extends THREE.Object3D {
 			
 			for( let [ i, astNode ] of astNodes.entries() ) {
 
-				
+
 				let mesh = ThreeObjectFactory.createBoxWithBordersIndented(
 					astNode.layout.width,
 					astNode.layout.height,
-					1,
+					astNode.layout.depth,
 					ColorHelper.getColorAtPos(2),
 					astNode.layout.edge.paths
 				);

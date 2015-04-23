@@ -159,7 +159,7 @@ class ThreeBoxWithBordersIndented extends THREE.Object3D {
 	  	this._border.matrix = this._mesh.matrixWorld;
 		this._border.matrixAutoUpdate = true;
 
-		this.add(this._border);
+		//this.add(this._border);
 		this.add(this._mesh);
 		this.add(this._edges);
 		this.add(this._text);
